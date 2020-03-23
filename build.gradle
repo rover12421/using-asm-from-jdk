@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'plus.rover.shaka.blog'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+tasks.withType(JavaCompile) {
+    /**
+     * 添加编译参数参数 -XDignore.symbol.file=true
+     * 让他可以识别内置 jdk 包下的信息。
+     * gradle 需要修改 executable 到 javac
+     */
+    options.fork = true
+    options.forkOptions.executable = 'javac'
+    options.compilerArgs.add("-XDignore.symbol.file=true")
+}
